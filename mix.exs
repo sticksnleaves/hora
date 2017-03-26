@@ -15,7 +15,8 @@ defmodule Me.Mixfile do
        "coveralls": :test,
        "coveralls.html": :test,
        "coveralls.travis": :test
-     ]
+     ],
+     test_coverage: [tool: ExCoveralls]
     ]
   end
 
