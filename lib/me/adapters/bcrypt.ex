@@ -9,8 +9,8 @@ defmodule Me.Adapter.Bcrypt do
 
   ## Options
 
-  * `log_rounds` - the number of calculations used to generate the hash
-    (default: 12`)
+  * `log_rounds` -  the computational complexity of the generation of the
+    password hash (default: 12`)
   """
 
   @behaviour Me.Adapter
