@@ -35,8 +35,7 @@ and `verify_password/2` functions.
 * `:secure_password_field_name` - field in map or struct to check against when
   using `authenticate/2`
 
-Configuration options can be provided when including the module or when in the
-application configuration.
+Configuration options can be provided as application configuration:
 
 **Example**
 
@@ -47,7 +46,7 @@ config :me, Me,
   secure_password_field_name: :password_hash
 ```
 
-or
+or when including `Me`:
 
 ```elixir
 defmodule MyModule do
