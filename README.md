@@ -158,7 +158,7 @@ adapter you will need to add `comeonin` as a dependency to your project.
 **Adapter Options**
 
 * `:log_rounds` - the computational complexity of the generation of the
-  password hash
+  password hash (default: value of `Comeonin.Config.bcrypt_log_rounds/0`)
 
 ### Me.Adapter.Pbkdf2
 

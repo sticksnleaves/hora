@@ -10,7 +10,7 @@ defmodule Me.Adapter.Bcrypt do
   ## Options
 
   * `log_rounds` -  the computational complexity of the generation of the
-    password hash (default: value of Comeonin.Config.bcrypt_log_rounds/0`)
+    password hash (default: value of `Comeonin.Config.bcrypt_log_rounds/0`)
   """
 
   @behaviour Me.Adapter
