@@ -1,4 +1,4 @@
-# Me
+# Hora
 
 Assumption free, adapter based password management for Elixir.
 
@@ -17,7 +17,7 @@ end
 
 ```elixir
 defmodule MyModule do
-  use Me, adapter: Me.Adapter.Bcrypt
+  use Hora, adapter: Hora.Adapter.Bcrypt
 end
 ```
 
@@ -35,23 +35,23 @@ and `verify_password/2` functions.
 Configuration options can be provided as application configuration:
 
 ```elixir
-config :me, Me,
-  adapter: Me.Adapter.Bcrypt,
+config :hora, Hora,
+  adapter: Hora.Adapter.Bcrypt,
   adapter_options: [log_rounds: 16],
   secure_password_field_name: :password_hash
 ```
 
-or when including `Me`:
+or when including `Hora`:
 
 ```elixir
 defmodule MyModule do
-  use Me, adapter: Me.Adapter.Bcrypt,
-          adapter_options: [log_rounds: 16],
-          secure_password_field_name: :password_hash
+  use Hora, adapter: Hora.Adapter.Bcrypt,
+            adapter_options: [log_rounds: 16],
+            secure_password_field_name: :password_hash
 end
 ```
 
-Note that the configuration passed into the `Me` module will override values
+Note that the configuration passed into the `Hora` module will override values
 provided in the application configuration.
 
 ### Functions
@@ -87,15 +87,15 @@ provided in the application configuration.
 
 ## Ecto
 
-Ecto isn't required to use Me. However, since this is probably the most common
+Ecto isn't required to use Hora. However, since this is probably the most common
 use case we tried to make integration with Ecto easy.
 
 Note that you will need to define `ecto` as a dependency in your project in
-order to use `Me.Ecto`.
+order to use `Hora.Ecto`.
 
 ```elixir
 defmodule MyModule do
-  use Me.Ecto, adapter: Me.Adapter.Bcrypt
+  use Hora.Ecto, adapter: Hora.Adapter.Bcrypt
 
   schema "my_schema" do
     field :password, :string, virtual: true
@@ -104,22 +104,22 @@ defmodule MyModule do
 end
 ```
 
-`Me.Ecto` will decorate your module with the same functions as `Me` with the
+`Hora.Ecto` will decorate your module with the same functions as `Hora` with the
 addition of `put_secure_password/1`.
 
 ### Configuration
 
-All configuration options are the same as the `Me` module except for these
+All configuration options are the same as the `Hora` module except for these
 additions:
 
 * `:password_field_name` - field in the schema to check for a changed value when
   generating a new secure password. The default value is `:password`.
 
-Defining the configuration is similar to the `Me` module:
+Defining the configuration is similar to the `Hora` module:
 
 ```elixir
-config :me, Me.Ecto,
-  adapter: Me.Adapter.Bcrypt,
+config :hora, Hora.Ecto,
+  adapter: Hora.Adapter.Bcrypt,
   adapter_options: [log_rounds: 16],
   password_field_name: :pw,
   secure_password_field_name: :password_hash
@@ -129,10 +129,10 @@ or
 
 ```elixir
 defmodule MyModule do
-  use Me.Ecto, adapter: Me.Adapter.Bcrypt,
-               adapter_options: [log_rounds: 16],
-               password_field_name: :pw,
-               secure_password_field_name: :password_hash
+  use Hora.Ecto, adapter: Hora.Adapter.Bcrypt,
+                 adapter_options: [log_rounds: 16],
+                 password_field_name: :pw,
+                 secure_password_field_name: :password_hash
 end
 ```
 
@@ -153,14 +153,14 @@ end
 Note that both of the packaged adapter rely on Comeonin. In order to use these
 adapter you will need to add `comeonin` as a dependency to your project.
 
-### Me.Adapter.Bcrypt
+### Hora.Adapter.Bcrypt
 
 **Adapter Options**
 
 * `:log_rounds` - the computational complexity of the generation of the
   password hash (default: value of `Comeonin.Config.bcrypt_log_rounds/0`)
 
-### Me.Adapter.Pbkdf2
+### Hora.Adapter.Pbkdf2
 
 **Adapter Options**
 
