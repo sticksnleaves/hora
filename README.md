@@ -63,7 +63,7 @@ defmodule MyModule do
   end
 end
 
-iex> MyModule.authenticate("crypted_password", "uncrypted_password")
+iex> MyModule.authenticate(my_module.password_digest, "uncrypted_password")
 # true or false
 
 iex> MyModule.secure_password("uncrypted_password")
