@@ -150,8 +150,8 @@ end
 
 ## Adapters
 
-Note that both of the packaged adapter rely on Comeonin. In order to use these
-adapter you will need to add `comeonin` as a dependency to your project.
+In order to use the adapters bundled with this project you will need to add
+`comeonin` as a dependency to your project.
 
 ### Hora.Adapter.Bcrypt
 
