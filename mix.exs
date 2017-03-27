@@ -45,6 +45,7 @@ defmodule Me.Mixfile do
       # test
       {:excoveralls, "~> 0.6.0", only: :test, runtime: false},
       # dev, test
+      {:comeonin, "~> 3.0", only: [:dev, :test]},
       {:ecto, "~> 2.1", only: [:dev, :test]}
     ]
   end
