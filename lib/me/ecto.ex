@@ -1,7 +1,7 @@
 defmodule Me.Ecto do
   def init(opts) do
     options = [
-      password_field_name: opts[:password_field_name] || :password
+      password_field_name: Me.Util.get_config(Me.Ecto, :password_field_name, opts) || :password
     ]
 
     Me.init(opts) ++ options
