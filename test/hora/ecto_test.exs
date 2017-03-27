@@ -16,7 +16,7 @@ defmodule Hora.EctoTest do
     def changeset(schema, params) do
       schema
       |> cast(params, [:password])
-      |> put_secure_password
+      |> put_secure_password(:password, :password_digest)
     end
   end
 

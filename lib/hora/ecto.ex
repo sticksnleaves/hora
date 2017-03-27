@@ -1,10 +1,6 @@
 defmodule Hora.Ecto do
   def init(opts) do
-    options = [
-      password_field_name: Hora.Util.get_config(Hora.Ecto, :password_field_name, opts) || :password
-    ]
-
-    Hora.init(opts) ++ options
+    Hora.init(opts)
   end
 
   defmacro __using__(opts) do
@@ -15,12 +11,9 @@ defmodule Hora.Ecto do
     quote do
       use Hora, unquote(options)
 
-      def put_secure_password(changeset) do
-        password_field_name = unquote(options)[:password_field_name]
-        secure_password_field_name = unquote(options)[:secure_password_field_name]
-
+      def put_secure_password(changeset, password_field_name, crypted_password_field_name) do
         if password = Ecto.Changeset.get_change(changeset, password_field_name) do
-          Ecto.Changeset.put_change(changeset, secure_password_field_name, secure_password(password))
+          Ecto.Changeset.put_change(changeset, crypted_password_field_name, secure_password(password))
         else
           changeset
         end
