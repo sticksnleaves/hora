@@ -96,6 +96,11 @@ order to use `Me.Ecto`.
 ```elixir
 defmodule MyModule do
   use Me.Ecto, adapter: Me.Adapter.Bcrypt
+
+  schema "my_schema" do
+    field :password, :string, virtual: true
+    field :password_digest, :string
+  end
 end
 ```
 
@@ -107,8 +112,8 @@ addition of `put_secure_password/1`.
 All configuration options are the same as the `Me` module except for these
 additions:
 
-* `:password_field_name` - field in the schema to check for a changed value. The
-  default value is `:password`.
+* `:password_field_name` - field in the schema to check for a changed value when
+  generating a new secure password. The default value is `:password`.
 
 Defining the configuration is similar to the `Me` module:
 
@@ -116,6 +121,7 @@ Defining the configuration is similar to the `Me` module:
 config :me, Me.Ecto,
   adapter: Me.Adapter.Bcrypt,
   adapter_options: [log_rounds: 16],
+  password_field_name: :pw,
   secure_password_field_name: :password_hash
 ```
 
@@ -125,7 +131,7 @@ or
 defmodule MyModule do
   use Me.Ecto, adapter: Me.Adapter.Bcrypt,
                adapter_options: [log_rounds: 16],
-               :password_field_name: :pw,
+               password_field_name: :pw,
                secure_password_field_name: :password_hash
 end
 ```
@@ -139,5 +145,25 @@ end
   The field to check for change is defined using the configuration option
   `:password_field_name`.
 
-  The field to put the generated password is defined as the configuration option
-  `:secure_password_field_name`.
+  The field to put the generated secure password is defined as the configuration
+  option `:secure_password_field_name`.
+
+## Adapters
+
+Note that both of the packaged adapter rely on Comeonin. In order to use these
+adapter you will need to add `comeonin` as a dependency to your project.
+
+### Me.Adapter.Bcrypt
+
+**Adapter Options**
+
+* `:log_rounds` - the computational complexity of the generation of the
+  password hash
+
+### Me.Adapter.Pbkdf2
+
+**Adapter Options**
+
+* `:rounds` - the number of calculations used to generate the hash
+  (default: value of `Comeonin.Config.pbkdf2_rounds/0`)
+* `:salt_length` - length of salt to generate (default: 16)
