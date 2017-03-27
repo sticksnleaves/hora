@@ -4,7 +4,7 @@ defmodule Me.Mixfile do
   def project do
     [app: :hora,
      name: "Hora",
-     description: "Assumption free password management",
+     description: "Extensible password management",
      version: "0.1.0",
      elixir: "~> 1.3",
      build_embedded: Mix.env == :prod,
