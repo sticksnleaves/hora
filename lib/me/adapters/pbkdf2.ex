@@ -16,11 +16,11 @@ defmodule Me.Adapter.Pbkdf2 do
 
   def init(opts) do
     verify_comeonin_dep()
-    
-    %{
-      rounds: opts[:rounds] || Comeonin.Config.pbkdf2_rounds,
+
+    [
+      rounds: opts[:rounds] || Comeonin.Config.pbkdf2_rounds(),
       salt_length: opts[:salt_length] || 16
-    }
+    ]
   end
 
   def secure_password(password, opts) do

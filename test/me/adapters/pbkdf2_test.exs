@@ -7,6 +7,18 @@ defmodule Me.Adapter.Pbkdf2Test do
 
       assert Regex.match?(~r/^\$pbkdf2-sha512\$\d{6}\$.{109}$/, Me.Adapter.Pbkdf2.secure_password("test", opts))
     end
+
+    test "uses :salt_length option" do
+      opts = Me.Adapter.Pbkdf2.init([salt_length: 45])
+
+      assert Regex.match?(~r/^\$pbkdf2-sha512\$\d{6}\$.{147}$/, Me.Adapter.Pbkdf2.secure_password("test", opts))
+    end
+
+    test "uses :rounds option" do
+      opts = Me.Adapter.Pbkdf2.init([rounds: 160001])
+
+      assert Regex.match?(~r/^\$pbkdf2-sha512\$160001\$.{109}$/, Me.Adapter.Pbkdf2.secure_password("test", opts))
+    end
   end
 
   describe "verify_password/3" do
