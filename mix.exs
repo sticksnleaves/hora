@@ -40,6 +40,7 @@ defmodule Me.Mixfile do
   defp deps do
     [
       # dev
+      {:credo, "~> 0.7", only: :dev, runtime: false},
       {:ex_doc, ">= 0.0.0", only: :dev},
       # test
       {:excoveralls, "~> 0.6.0", only: :test, runtime: false},
