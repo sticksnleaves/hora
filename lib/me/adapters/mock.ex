@@ -9,8 +9,8 @@ defmodule Me.Adapter.Mock do
   def init(opts), do: opts
 
   @doc false
-  def verify_password(_password, _secured_password, _opts) do
-    true
+  def verify_password(password, secured_password, _opts) do
+    password == secured_password
   end
 
   @doc false
