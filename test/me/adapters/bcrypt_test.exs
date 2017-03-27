@@ -2,8 +2,8 @@ defmodule Me.Adapter.BcryptTest do
   use ExUnit.Case
 
   describe "init/1" do
-    test ":log_rounds uses default value of 12" do
-      assert Me.Adapter.Bcrypt.init([])[:log_rounds] == 12
+    test ":log_rounds uses default value of Comeonin.Config.bcrypt_log_rounds" do
+      assert Me.Adapter.Bcrypt.init([])[:log_rounds] == Comeonin.Config.bcrypt_log_rounds()
     end
 
     test ":log_rounds uses value specified" do
