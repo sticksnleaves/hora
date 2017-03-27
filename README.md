@@ -96,5 +96,5 @@ You can define which adapter to use and it's options in one of two ways:
 
 ## Adapters
 
-* [`Hora.Adapter.Bcrypt`]()
-* [`Hora.Adapter.Pbkdf2`]()
+* [`Hora.Adapter.Bcrypt`](https://hexdocs.pm/hora/Hora.Adapter.Bcrypt.html)
+* [`Hora.Adapter.Pbkdf2`](https://hexdocs.pm/hora/Hora.Adapter.Pbkdf2.html)
