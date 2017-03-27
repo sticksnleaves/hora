@@ -1,17 +1,17 @@
-defmodule Me do
+defmodule Hora do
   @type opts :: map | list
 
   @doc false
   def init(opts) do
     [
-      adapter: Me.Util.get_config!(Me, :adapter, opts),
-      adapter_options: Me.Util.get_config(Me, :adapter_options, opts) || [],
-      secure_password_field_name: Me.Util.get_config(Me, :secure_password_field_name, opts) || :password_digest
+      adapter: Hora.Util.get_config!(Hora, :adapter, opts),
+      adapter_options: Hora.Util.get_config(Hora, :adapter_options, opts) || [],
+      secure_password_field_name: Hora.Util.get_config(Hora, :secure_password_field_name, opts) || :password_digest
     ]
   end
 
   defmacro __using__(opts) do
-    options = Me.init(opts)
+    options = Hora.init(opts)
 
     quote do
       def authenticate(%{} = schema, password) do

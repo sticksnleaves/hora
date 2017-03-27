@@ -4,12 +4,12 @@ Assumption free, adapter based password management for Elixir.
 
 ## Installation
 
-This package can be installed by adding `me` to your list of dependencies in
+This package can be installed by adding `hora` to your list of dependencies in
 `mix.exs`:
 
 ```elixir
 def deps do
-  [{:me, "~> 0.1.0"}]
+  [{:hora, "~> 0.1.0"}]
 end
 ```
 

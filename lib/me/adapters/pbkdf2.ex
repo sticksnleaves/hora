@@ -1,4 +1,4 @@
-defmodule Me.Adapter.Pbkdf2 do
+defmodule Hora.Adapter.Pbkdf2 do
   @moduledoc """
   Adapter for managing passwords using pbkdf2_sha512.
 
@@ -12,7 +12,7 @@ defmodule Me.Adapter.Pbkdf2 do
   * `salt_length` - length of salt to generate (default: 16)
   """
 
-  @behaviour Me.Adapter
+  @behaviour Hora.Adapter
 
   def init(opts) do
     verify_comeonin_dep()
@@ -38,7 +38,7 @@ defmodule Me.Adapter.Pbkdf2 do
   defp verify_comeonin_dep do
     unless Code.ensure_loaded?(Comeonin) do
       raise """
-      You tried to use Me.Adapter.Pbkdf2, but the Comeonin module is not loaded.
+      You tried to use Hora.Adapter.Pbkdf2, but the Comeonin module is not loaded.
       Please add comeonin to your dependencies.
       """
     end

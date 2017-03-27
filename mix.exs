@@ -2,9 +2,9 @@ defmodule Me.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :me,
-     name: "me",
-     description: "Password management for Elixir",
+    [app: :hora,
+     name: "Hora",
+     description: "Assumption free password management",
      version: "0.1.0",
      elixir: "~> 1.3",
      build_embedded: Mix.env == :prod,
@@ -55,7 +55,7 @@ defmodule Me.Mixfile do
       maintainers: ["Anthony Smith"],
       licenses: ["MIT"],
       links: %{
-        GitHub: "https://github.com/sticksnleaves/me"
+        GitHub: "https://github.com/sticksnleaves/hora"
       }
     ]
   end

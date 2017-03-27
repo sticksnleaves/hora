@@ -1,9 +1,9 @@
-defmodule Me.Adapter.Mock do
+defmodule Hora.Adapter.Mock do
   @moduledoc """
   Mock adapter used for testing.
   """
 
-  @behaviour Me.Adapter
+  @behaviour Hora.Adapter
 
   @doc false
   def init(opts), do: opts

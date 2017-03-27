@@ -1,19 +1,19 @@
-defmodule Me.Ecto do
+defmodule Hora.Ecto do
   def init(opts) do
     options = [
-      password_field_name: Me.Util.get_config(Me.Ecto, :password_field_name, opts) || :password
+      password_field_name: Hora.Util.get_config(Hora.Ecto, :password_field_name, opts) || :password
     ]
 
-    Me.init(opts) ++ options
+    Hora.init(opts) ++ options
   end
 
   defmacro __using__(opts) do
     verify_ecto_dep()
 
-    options = Me.Ecto.init(opts)
+    options = Hora.Ecto.init(opts)
 
     quote do
-      use Me, unquote(options)
+      use Hora, unquote(options)
 
       def put_secure_password(changeset) do
         password_field_name = unquote(options)[:password_field_name]
@@ -32,7 +32,7 @@ defmodule Me.Ecto do
 
   defp verify_ecto_dep do
     unless Code.ensure_loaded?(Ecto) do
-      raise "You tried to use Me.Ecto, but the Ecto module is not loaded. " <>
+      raise "You tried to use Hora.Ecto, but the Ecto module is not loaded. " <>
         "Please add ecto to your dependencies."
     end
   end

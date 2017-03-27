@@ -1,10 +1,10 @@
-defmodule Me.EctoTest do
+defmodule Hora.EctoTest do
   use ExUnit.Case
 
   defmodule TestModule do
     use Ecto.Schema
 
-    use Me.Ecto, adapter: Me.Adapter.Mock
+    use Hora.Ecto, adapter: Hora.Adapter.Mock
 
     import Ecto.Changeset
 

@@ -1,11 +1,9 @@
-defmodule Me.Adapter.Bcrypt do
+defmodule Hora.Adapter.Bcrypt do
   @moduledoc """
   Adapter for managing passwords using bcrypt.
 
   Note that you will need to add `comeonin` as a dependency to your project in
   order to use this adapter.
-
-  ## Example
 
   ## Options
 
@@ -13,7 +11,7 @@ defmodule Me.Adapter.Bcrypt do
     password hash (default: value of `Comeonin.Config.bcrypt_log_rounds/0`)
   """
 
-  @behaviour Me.Adapter
+  @behaviour Hora.Adapter
 
   def init(opts) do
     verify_comeonin_dep()
@@ -38,7 +36,7 @@ defmodule Me.Adapter.Bcrypt do
   defp verify_comeonin_dep do
     unless Code.ensure_loaded?(Comeonin) do
       raise """
-      You tried to use Me.Adapter.Bcrypt, but the Comeonin module is not loaded.
+      You tried to use Hora.Adapter.Bcrypt, but the Comeonin module is not loaded.
       Please add comeonin to your dependencies.
       """
     end

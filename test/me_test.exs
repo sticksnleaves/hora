@@ -1,8 +1,8 @@
-defmodule MeTest do
+defmodule HoraTest do
   use ExUnit.Case
 
   defmodule TestModule do
-    use Me, adapter: Me.Adapter.Mock
+    use Hora, adapter: Hora.Adapter.Mock
   end
 
   describe "authenticate/2" do

@@ -1,4 +1,4 @@
-defmodule Me.Util do
+defmodule Hora.Util do
   @moduledoc false
 
   @doc """
@@ -7,7 +7,7 @@ defmodule Me.Util do
   """
   def get_config(module, key, opts) do
     opts[key]
-    || Application.get_env(:me, module)[key]
+    || Application.get_env(:hora, module)[key]
   end
 
   @doc """
