@@ -15,9 +15,6 @@ end
 
 ## Usage
 
-This library doesn't make any assumptions on where you intend to use it. It's
-easy to get started by just including `Me` in your module.
-
 ```elixir
 defmodule MyModule do
   use Me, adapter: Me.Adapter.Bcrypt
@@ -37,8 +34,6 @@ and `verify_password/2` functions.
 
 Configuration options can be provided as application configuration:
 
-**Example**
-
 ```elixir
 config :me, Me,
   adapter: Me.Adapter.Bcrypt,
@@ -55,6 +50,9 @@ defmodule MyModule do
           secure_password_field_name: :password_hash
 end
 ```
+
+Note that the configuration passed into the `Me` module will override values
+provided in the application configuration.
 
 ### Functions
 
@@ -87,6 +85,59 @@ end
   # true or false
   ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/me](https://hexdocs.pm/me).
+## Ecto
+
+Ecto isn't required to use Me. However, since this is probably the most common
+use case we tried to make integration with Ecto easy.
+
+Note that you will need to define `ecto` as a dependency in your project in
+order to use `Me.Ecto`.
+
+```elixir
+defmodule MyModule do
+  use Me.Ecto, adapter: Me.Adapter.Bcrypt
+end
+```
+
+`Me.Ecto` will decorate your module with the same functions as `Me` with the
+addition of `put_secure_password/1`.
+
+### Configuration
+
+All configuration options are the same as the `Me` module except for these
+additions:
+
+* `:password_field_name` - field in the schema to check for a changed value. The
+  default value is `:password`.
+
+Defining the configuration is similar to the `Me` module:
+
+```elixir
+config :me, Me.Ecto,
+  adapter: Me.Adapter.Bcrypt,
+  adapter_options: [log_rounds: 16],
+  secure_password_field_name: :password_hash
+```
+
+or
+
+```elixir
+defmodule MyModule do
+  use Me.Ecto, adapter: Me.Adapter.Bcrypt,
+               adapter_options: [log_rounds: 16],
+               :password_field_name: :pw,
+               secure_password_field_name: :password_hash
+end
+```
+
+### Functions
+
+* `put_secure_password/1` - if the password has changed then generate a new
+  secure password and add it as a change to the changeset; otherwise return the
+  changeset without modification
+
+  The field to check for change is defined using the configuration option
+  `:password_field_name`.
+
+  The field to put the generated password is defined as the configuration option
+  `:secure_password_field_name`.
