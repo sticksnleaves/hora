@@ -15,7 +15,15 @@ end
 
 ## The Name
 
-Hora (Horae, plural) is a custodian of the Olympic gates in the Iliad.
+When working on `hora` I felt inspired to channel my inner Homer. In the Iliad,
+Hora (Horae, plural) is a custodian of the Olympic gates. This seemed
+appropriate for the goals of the project.
+
+[It's been brought to my attention](https://elixirforum.com/t/hora-extensible-password-management/4510/2?u=anthonator)
+that hora may have a more unsavory meaning in Swedish. This project's name was
+not intended to reference this meaning.
+
+I hope my Swedish friends will find it within themselves to forgive me.
 
 ## Dependencies
 
