@@ -13,6 +13,10 @@ def deps do
 end
 ```
 
+## The Name
+
+Hora (Horae, plural) is a custodian of the Olympic gates in the Iliad.
+
 ## Dependencies
 
 When building Hora we tried our best not to make any assumptions on how it would
