@@ -1,11 +1,13 @@
 defmodule Me.Mixfile do
   use Mix.Project
 
+  @version "1.0.0"
+
   def project do
     [app: :hora,
      name: "Hora",
      description: "Extensible password management",
-     version: "0.1.0",
+     version: @version,
      elixir: "~> 1.3",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
@@ -39,14 +41,13 @@ defmodule Me.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
+      {:comeonin, "~> 3.0", optional: true},
+      {:ecto, "~> 2.1", optional: true},
       # dev
       {:credo, "~> 0.7", only: :dev, runtime: false},
       {:ex_doc, ">= 0.0.0", only: :dev},
       # test
-      {:excoveralls, "~> 0.6.0", only: :test, runtime: false},
-      # dev, test
-      {:comeonin, "~> 3.0", only: [:dev, :test]},
-      {:ecto, "~> 2.1", only: [:dev, :test]}
+      {:excoveralls, "~> 0.7.0", only: :test, runtime: false}
     ]
   end
 
