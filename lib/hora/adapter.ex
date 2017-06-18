@@ -9,16 +9,16 @@ defmodule Hora.Adapter do
   The options returned from this function will be given to `verify_password/3`
   and `secure_password/2`.
   """
-  @callback init(Hora.opts) :: Hora.opts
+  @callback init(opts :: Hora.opts) :: Hora.opts
 
   @doc """
   Secures the password. This will most likely be by either hashing or encrypting
   the password provided.
   """
-  @callback secure_password(String.t, Hora.opts) :: String.t
+  @callback secure_password(password :: String.t, opts :: Hora.opts) :: String.t
 
   @doc """
   Verifies that the plain text password and the secure password match.
   """
-  @callback verify_password(String.t, String.t, Hora.opts) :: boolean
+  @callback verify_password(password :: String.t, secure_password :: String.t, opts :: Hora.opts) :: boolean
 end
