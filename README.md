@@ -9,59 +9,36 @@ This package can be installed by adding `hora` to your list of dependencies in
 
 ```elixir
 def deps do
-  [{:hora, "~> 0.1.0"}]
+  [
+    {:hora, "~> 1.0.0"},
+    {:comeonin, "~> 3.0"}, # optional, needed for bcrypt and pbkdf2_sha512 support
+    {:ecto, "~> 2.1"} # optional, needed for changeset support
+  ]
 end
 ```
 
-## The Name
-
-When working on `hora` I felt inspired to channel my inner Homer. In the Iliad,
-Hora (Horae, plural) is a custodian of the Olympic gates. This seemed
-appropriate for the goals of the project.
-
-[It's been brought to my attention](https://elixirforum.com/t/hora-extensible-password-management/4510/2?u=anthonator)
-that hora may have a more unsavory meaning in Swedish. This project's name was
-not intended to reference this meaning.
-
-I hope my Swedish friends will find it within themselves to forgive me.
-
-## Dependencies
-
-When building Hora we tried our best not to make any assumptions on how it would
-be used. However, we did want to make sure that we removed any friction when
-using Hora for the most common use cases.
-
-Therefore, if you want to take advantage of our Ecto and Comeonin integrations
-you will need to include them as dependencies in your project.
-
-## Usage
+## Adapters
 
 Hora takes an adapter based strategy for defining the cryptographic functions
 used to secure passwords. We provide support for bcrypt and pbkdf2_sha512 but
 it's possible to use your own custom adapters as well.
 
-To get started you just need to configure which adapter to use and then include
-`Hora` in your module.
+* [`Hora.Adapter.Bcrypt`](https://hexdocs.pm/hora/Hora.Adapter.Bcrypt.html)
+* [`Hora.Adapter.Pbkdf2`](https://hexdocs.pm/hora/Hora.Adapter.Pbkdf2.html)
+
+## Usage
 
 ```elixir
-defmodule MyModule do
-  use Hora, adapter: Hora.Adapter.Bcrypt
+iex> Hora.verify_password("uncrypted_password", "crypted_password")
 
-  defstruct [:password, :password_digest]
-end
-
-iex> MyModule.authenticate("crypted_password", "uncrypted_password")
-# true or false
-
-iex> MyModule.secure_password("uncrypted_password")
-# crypted password
+iex> Hora.secure_password("uncrypted_password")
 ```
 
-If you're using Ecto use `Hora.Ecto` instead.
+## Ecto
 
 ```elixir
 defmodule MyModule do
-  use Hora.Ecto, adapter: Hora.Adapter.Bcrypt
+  use Ecto.Schema
 
   schema "my_schema" do
     field :password,        :string, virtual: true
@@ -71,15 +48,9 @@ defmodule MyModule do
   def changeset(schema, params) do
     schema
     |> cast(params, [:password])
-    |> put_secure_password(:password, :password_digest)
+    |> Hora.Changeset.put_secure_password(:password, :password_digest)
   end
 end
-
-iex> MyModule.authenticate(my_module.password_digest, "uncrypted_password")
-# true or false
-
-iex> MyModule.secure_password("uncrypted_password")
-# crypted password
 ```
 
 ## Configuration
@@ -91,22 +62,22 @@ You can define which adapter to use and it's options in one of two ways:
   **Example**
 
   ```elixir
-  config :hora, Hora,
+  config :hora,
     adapter: Hora.Adapter.Bcrypt,
     adapter_options: [log_rounds: 14]
   ```
-2. When including `Hora` in your module
+2. When using the Hora functions:
 
   **Example**
 
   ```elixir
-  defmodule MyModule do
-    use Hora, adapter: Hora.Adapter.Bcrypt,
-              adapter_options: [log_rounds: 14]
-  end
+  Hora.secure_password("uncrypted_password", adapter: Hora.Adapter.Bcrypt)
   ```
 
-## Adapters
+  ```elixir
+  Hora.verify_password("uncrypted_password", "crypted_password", adapter: Hora.Adapter.Bcrypt)
+  ```
 
-* [`Hora.Adapter.Bcrypt`](https://hexdocs.pm/hora/Hora.Adapter.Bcrypt.html)
-* [`Hora.Adapter.Pbkdf2`](https://hexdocs.pm/hora/Hora.Adapter.Pbkdf2.html)
+  ```elixir
+  Hora.Changeset.put_secure_password("uncrypted_password", adapter: Hora.Adapter.Bcrypt)
+  ```

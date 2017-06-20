@@ -4,9 +4,8 @@ defmodule Hora.EctoTest do
   defmodule TestModule do
     use Ecto.Schema
 
-    use Hora.Ecto, adapter: Hora.Adapter.Mock
-
     import Ecto.Changeset
+    import Hora.Changeset
 
     schema "some schema" do
       field :password, :string, virtual: true
@@ -20,11 +19,17 @@ defmodule Hora.EctoTest do
     end
   end
 
-  describe "put_secure_password/2" do
+  describe "put_secure_password/3" do
     test "adds secure password to changeset" do
       changeset = TestModule.changeset(%TestModule{}, %{password: "password"})
 
       assert Ecto.Changeset.get_change(changeset, :password_digest) == "MOCKPASSWORD"
+    end
+
+    test "does nothing if password did not change" do
+      changeset = TestModule.changeset(%TestModule{}, %{})
+
+      assert Ecto.Changeset.get_change(changeset, :password_digest) == nil
     end
   end
 end
