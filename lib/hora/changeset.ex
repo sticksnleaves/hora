@@ -1,6 +1,22 @@
 defmodule Hora.Changeset do
+  @moduledoc """
+  Utility functions for working with Ecto.Changeset.
+  """
+
   import Ecto.Changeset
 
+  @doc """
+  Modifies the changeset by adding a secure password if a change to the password
+  has been made.
+
+  ### Example
+
+  ```elixir
+  changeset
+  |> Hora.Changeset.put_secure_password(:password, :password_digest)
+  ```
+  """
+  @spec put_secure_password(Ecto.Changeset.t, atom(), atom(), list()) :: Ecto.Changeset.t
   def put_secure_password(changeset, password_field_name, crypted_password_field_name, opts \\ []) do
     verify_ecto_dep()
 

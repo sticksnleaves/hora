@@ -20,5 +20,5 @@ defmodule Hora.Adapter do
   @doc """
   Verifies that the plain text password and the secure password match.
   """
-  @callback verify_password(password :: String.t, secure_password :: String.t, opts :: Hora.opts) :: boolean
+  @callback verify_password(password :: String.t, crypted_password :: String.t, opts :: Hora.opts) :: boolean
 end
