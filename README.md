@@ -10,8 +10,9 @@ This package can be installed by adding `hora` to your list of dependencies in
 ```elixir
 def deps do
   [
-    {:hora, "~> 1.0.0"},
-    {:comeonin, "~> 3.0"}, # optional, needed for bcrypt and pbkdf2_sha512 support
+    {:hora, "~> 2.0.0"},
+    {:bcrypt_elixir, "~> 0.12"}, # optional, needed for bcrypt support
+    {:pbkdf2_elixir, "~> 0.12"}, # optional, needed for pbkdf2 support
     {:ecto, "~> 2.1"} # optional, needed for changeset support
   ]
 end
@@ -29,12 +30,14 @@ it's possible to use your own custom adapters as well.
 ## Usage
 
 ```elixir
-iex> Hora.verify_password("uncrypted_password", "crypted_password")
+iex> Hora.secure_password("plain text password")
 
-iex> Hora.secure_password("uncrypted_password")
+iex> Hora.verify_password("plain text password", "hashed password")
 ```
 
 ## Ecto
+
+* [`Hora.Changeset`](https://hexdocs.pm/hora/Hora.Changeset.html)
 
 ```elixir
 defmodule MyModule do
@@ -79,5 +82,5 @@ You can define which adapter to use and it's options in one of two ways:
   ```
 
   ```elixir
-  Hora.Changeset.put_secure_password("uncrypted_password", adapter: Hora.Adapter.Bcrypt)
+  Hora.Changeset.put_secure_password(:password, :password_digest, adapter: Hora.Adapter.Bcrypt)
   ```
