@@ -15,28 +15,23 @@ defmodule Hora.Adapter.Pbkdf2 do
   @behaviour Hora.Adapter
 
   def init(opts) do
-    verify_comeonin_dep()
+    verify_dep()
 
-    [
-      rounds: opts[:rounds] || Comeonin.Config.pbkdf2_rounds(),
-      salt_length: opts[:salt_length] || 16
-    ]
+    opts
   end
 
   def secure_password(password, opts) do
-    salt = Comeonin.Pbkdf2.gen_salt(opts[:salt_length])
-
-    Comeonin.Pbkdf2.hashpass(password, salt, opts[:rounds])
+    Pbkdf2.hash_pwd_salt(password, opts)
   end
 
   def verify_password(password, secured_password, _opts) do
-    Comeonin.Pbkdf2.checkpw(password, secured_password)
+    Pbkdf2.verify_pass(password, secured_password)
   end
 
   # private
 
-  defp verify_comeonin_dep do
-    unless Code.ensure_loaded?(Comeonin) do
+  defp verify_dep do
+    unless Code.ensure_loaded?(Pbkdf2) do
       raise """
       You tried to use Hora.Adapter.Pbkdf2, but the Comeonin module is not loaded.
       Please add comeonin to your dependencies.

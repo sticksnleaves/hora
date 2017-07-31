@@ -2,11 +2,7 @@ defmodule Hora.Adapter.BcryptTest do
   use ExUnit.Case
 
   describe "init/1" do
-    test ":log_rounds uses default value of Comeonin.Config.bcrypt_log_rounds" do
-      assert Hora.Adapter.Bcrypt.init([])[:log_rounds] == Comeonin.Config.bcrypt_log_rounds()
-    end
-
-    test ":log_rounds uses value specified" do
+    test "uses provided opts value" do
       assert Hora.Adapter.Bcrypt.init([log_rounds: 13])[:log_rounds] == 13
     end
   end
@@ -22,7 +18,7 @@ defmodule Hora.Adapter.BcryptTest do
   describe "verify_password/3" do
     test "checks that the password is valid using bcrypt" do
       opts = Hora.Adapter.Bcrypt.init([])
-      hash = Comeonin.Bcrypt.hashpwsalt("test")
+      hash = Bcrypt.hash_pwd_salt("test")
 
       assert Hora.Adapter.Bcrypt.verify_password("test", hash, opts) == true
     end

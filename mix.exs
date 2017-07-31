@@ -41,7 +41,8 @@ defmodule Me.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      {:comeonin, "~> 3.0", optional: true},
+      {:bcrypt_elixir, "~> 0.12", optional: true},
+      {:pbkdf2_elixir, "~> 0.12", optional: true},
       {:ecto, "~> 2.1", optional: true},
       # dev
       {:credo, "~> 0.7", only: :dev, runtime: false},
