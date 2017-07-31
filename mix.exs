@@ -45,7 +45,7 @@ defmodule Me.Mixfile do
       {:ecto, "~> 2.1", optional: true},
       # dev
       {:credo, "~> 0.7", only: :dev, runtime: false},
-      {:ex_doc, ">= 0.0.0", only: :dev},
+      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
       # test
       {:excoveralls, "~> 0.7.0", only: :test, runtime: false}
     ]
